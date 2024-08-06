@@ -31,17 +31,18 @@
             bottom: 0%;
             transform: translateY(-50%);
         }
+
         .book_title {
             padding: 8px 16px;
             background-color: blue;
             height: 15%;
         }
     </style>
-    
+
 </head>
 
 <body>
-    
+
     <div class="d-flex">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
             <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -113,15 +114,18 @@
             </div>
             <div class="input-group">
                 <span class="input-group-text">UserID and Password</span>
-                <input type="text" aria-label="UserID" class="form-control" placeholder="UserID">
-                <input type="text" aria-label="Password" class="form-control" placeholder="Password(방명록 삭제시 필요)">
+                <input type="text" id="book_id" aria-label="UserID" class="form-control" placeholder="UserID">
+                <input type="text" id="book_pass" aria-label="Password" class="form-control"
+                    placeholder="Password(방명록 삭제시 필요)">
             </div>
             <p></p>
             <div class="input-group input-group-lg">
                 <span class="input-group-text" id="inputGroup-sizing-lg">작성</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
+                <input type="text" id="book_message" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-lg">
             </div>
+            <p></p>
+            <button class="btn btn-primary" onclick="saveData()">방명록 등록</button>
             <hr>
             <hr>
             <div class="box">
@@ -200,4 +204,5 @@
         </div>
     </div>
 </body>
+
 </html>
