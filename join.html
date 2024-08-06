@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</head>
+
+<style>
+    .box {
+        width: 90%;
+        padding: 20px;
+        border: 2px solid #000;
+        background-color: #f0f0f0;
+        position: relative;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        bottom: 0%;
+        transform: translateY(-50%);
+    }
+
+    /* 부모 컨테이너에 대한 스타일 설정 */
+    .container {
+        display: flex;
+        /* Flexbox 활성화 */
+        justify-content: center;
+        /* 요소들을 왼쪽 정렬 */
+        align-items: center;
+        /* 요소들을 상단 정렬 */
+        padding: 20px;
+        background-color: white;
+        /* 배경색 설정 */
+        margin-top: 100px;
+    }
+
+    /* 이미지 업로드와 input 요소들에 대한 스타일 설정 */
+    .upload-section,
+    .input-section {
+        margin: 0 30px;
+        /* 요소들 간의 간격 설정 */
+    }
+
+    /* input 섹션 내 요소들을 수직 정렬하기 위한 설정 */
+    .input-section {
+        display: flex;
+        flex-direction: column;
+        /* 요소들을 세로 방향으로 배치 */
+        gap: 10px;
+        /* 요소들 간의 간격 설정 */
+    }
+
+    /* label과 input을 수평으로 배치하기 위한 설정 */
+    .input-wrapper {
+        display: flex;
+        align-items: center;
+        /* 요소들을 수직 중앙 정렬 */
+        margin-top: 5px;
+    }
+
+    .input-wrapper.right-align {
+        justify-content: flex-end;
+    }
+
+    /* label에 대한 공통 스타일 설정 */
+    .input-wrapper label {
+        width: 100px;
+        /* label의 고정 너비 설정 */
+        margin-right: 10px;
+        /* label과 input 간의 간격 설정 */
+    }
+
+    /* input 요소에 대한 공통 스타일 설정 */
+    .input-wrapper input {
+        height: 25px;
+        width: 280px;
+        margin: 5px auto 5px auto;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        flex: 1;
+        /* input 요소가 가능한 넓이를 차지하도록 설정 */
+    }
+
+    .input-wrapper>button {
+        padding: 10px;
+        margin-left: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .image-preview {
+        width: 350px;
+        height: 350px;
+        border: 2px dashed #ececec;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+        background-color: #f0f0f0;
+    }
+
+    .image-preview img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .upload-input {
+        display: none;
+        /* 파일 입력을 숨깁니다 */
+    }
+
+    .placeholder-text {
+        font-size: 16px;
+        color: #797979;
+        margin-top: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .deleteImg button {
+        margin-top: 3px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<script type="module">
+    // Firebase SDK 라이브러리 가져오기
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyB9HJvVGqIT-q9O_98bLmPkJcnB6VYkVks",
+        authDomain: "e1i3f4-5cb7b.firebaseapp.com",
+        projectId: "e1i3f4-5cb7b",
+        storageBucket: "e1i3f4-5cb7b.appspot.com",
+        messagingSenderId: "416738809409",
+        appId: "1:416738809409:web:fcfca343f2c00460de98c0",
+        measurementId: "G-WSM2VS15FC"
+    };
+
+    // Firebase 인스턴스 초기화
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+
+    $(document).ready(function () {
+        let url = "http://spartacodingclub.shop/sparta_api/seoulair";
+        fetch(url).then(res => res.json()).then(data => {
+            let mise = data['RealtimeCityAir']['row'][0]['IDEX_NM']
+            $('#msg').text(mise)
+        })
+    })
+
+    $(document).ready(function (input) {
+        let file = input.files[0]; // 선택파일 가져오기
+
+        let newImage = document.createElement("img"); //새 이미지 태그 생성
+
+        //이미지 source 가져오기
+        newImage.src = URL.createObjectURL(file);
+        newImage.style.width = "100%"; //div에 꽉차게 넣으려고
+        newImage.style.height = "100%";
+        newImage.style.objectFit = "cover"; // div에 넘치지 않고 들어가게
+
+        //이미지를 image-show div에 추가
+        let container = document.getElementById('image-show');
+        container.appendChild(newImage);
+    })
+</script>
+
+<body>
+    <div class="d-flex">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+            <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <div class="badge text-bg-primary text-wrap" style="width: 8rem; font-size: large;">
+                    E1I3F4
+                </div>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active" aria-current="page">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#home"></use>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#speedometer2"></use>
+                        </svg>
+                        Members
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#table"></use>
+                        </svg>
+                        Join
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#grid"></use>
+                        </svg>
+                        Guest's Book
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>mdo</strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="upload-section">
+                <div class="image-preview" id="image-preview">
+                    <img id="preview-image" src="" alt="Image Preview">
+                </div>
+                <div class="placeholder-text">Click to select image</div>
+                <input type="file" id="file-upload" class="upload-input" accept="image/*">
+                <div class="deleteImg" id="deleteImg">
+                </div>
+            </div>
+            <div class="input-section">
+                <div class="input-wrapper">
+                    <label for="name">이름 :</label>
+                    <input type="text" id="name">
+                </div>
+                <div class="input-wrapper">
+                    <label for="mbti">MBTI :</label>
+                    <input type="text" id="mbti">
+                </div>
+                <div class="input-wrapper">
+                    <label for="intro">간단 소개 :</label>
+                    <input type="text" id="intro">
+                </div>
+                <div class="input-wrapper">
+                    <label for="gitUrl">깃헙 링크 :</label>
+                    <input type="url" id="gitUrl">
+                </div>
+                <div class="input-wrapper">
+                    <label for="blogUrl">블로그 링크 :</label>
+                    <input type="url" id="blogUrl">
+                </div>
+                <div class="input-wrapper">
+                    <label for="userID">아이디 :</label>
+                    <input type="id" id="userID">
+                </div>
+                <div class="input-wrapper">
+                    <label for="userPW">비밀번호 :</label>
+                    <input type="password" id="userPW">
+                </div>
+                <div class="input-wrapper right-align">
+                    <msg id="validMsg"></msg>
+                    <button type="regist" id="registBtn">멤버 등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="regist.js"></script>
+<script src="upload.js"></script>
+
+</html>
