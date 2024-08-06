@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .box {
             width: 90%;
@@ -19,7 +20,7 @@
             position: relative;
         }
 
-        .btn {
+        .btnn {
             padding: 8px 16px;
             background-color: #007bff;
             color: white;
@@ -31,12 +32,18 @@
             bottom: 0%;
             transform: translateY(-50%);
         }
+
+        .book_title {
+            padding: 8px 16px;
+            background-color: blue;
+            height: 15%;
+        }
     </style>
-    
+
 </head>
 
 <body>
-    
+
     <div class="d-flex">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
             <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -50,7 +57,7 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link active" aria-current="page">
+                    <a href="home.html" class="nav-link link-dark" aria-current="page">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#home"></use>
                         </svg>
@@ -58,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="members.html" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#speedometer2"></use>
                         </svg>
@@ -66,7 +73,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="join.html" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#table"></use>
                         </svg>
@@ -74,7 +81,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="#" class="nav-link active">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#grid"></use>
                         </svg>
@@ -101,71 +108,128 @@
             </div>
         </div>
         <div class="flex-grow-1 p-3">
+            <div class="book_title">
+                <div>
+                    방명록 (Guest's Book)
+                </div>
+            </div>
             <div class="input-group">
                 <span class="input-group-text">UserID and Password</span>
-                <input type="text" aria-label="UserID" class="form-control" placeholder="UserID">
-                <input type="text" aria-label="Password" class="form-control" placeholder="Password(방명록 삭제시 필요)">
+                <input type="text" id="book_id" aria-label="UserID" class="form-control" placeholder="UserID">
+                <input type="text" id="book_pass" aria-label="Password" class="form-control"
+                    placeholder="Password(방명록 삭제시 필요)">
             </div>
             <p></p>
             <div class="input-group input-group-lg">
                 <span class="input-group-text" id="inputGroup-sizing-lg">작성</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
+                <input type="text" id="book_message" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-lg">
             </div>
-            <hr>
-            <hr>
-            <div class="box">
-                <span>UserID</span>
-                <p class="lh-base">방명록 내용</p>
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    ...
+            <p></p>
+            <button type="button" class="btn btn-primary" onclick="saveData()" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">방명록 등록</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            방명록 등록이 완료되었습니다.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn">삭제</button>
+            </div>
+            <hr>
+            <hr>
+            <div class="box">
+                <span>UserID</span>
+                <p class="lh-base">방명록 내용</p>
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
+                    삭제
+                </button>
             </div>
             <br>
             <div class="box">
                 <span>UserID</span>
                 <p class="lh-base">방명록 내용</p>
-                <button class="btn">삭제</button>
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
+                    삭제
+                </button>
             </div>
             <br>
             <div class="box">
                 <span>UserID</span>
                 <p class="lh-base">방명록 내용</p>
-                <button class="btn">삭제</button>
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
+                    삭제
+                </button>
             </div>
             <br>
             <div class="box">
                 <span>UserID</span>
                 <p class="lh-base">방명록 내용</p>
-                <button class="btn">삭제</button>
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
+                    삭제
+                </button>
             </div>
             <br>
             <div class="box">
                 <span>UserID</span>
                 <p class="lh-base">방명록 내용</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
                     삭제
                 </button>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="exampleModals" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1"> <!--버튼 누를 경우 id="exampleModalToggle"로 인해 modal 켜짐-->
+        <div class="modal-dialog modal-dialog-centered"> <!--modal창 설명-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">방명록 삭제</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    UserID 방명록 내용
+                    방명록 삭제를 위해 등록 시 설정한 Password를 입력해 주세요.
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Password:</label>
+                            <input type="text" class="form-control" id="valid-password">
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                        data-bs-toggle="modal">삭제</button> <!--버튼 클릭 시 exampleModalToggle2로 이동-->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">삭제 성공</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    삭제 완료했습니다.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>
