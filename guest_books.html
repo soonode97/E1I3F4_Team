@@ -64,7 +64,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="members.html" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#speedometer2"></use>
                         </svg>
@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="join.html" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#table"></use>
                         </svg>
@@ -125,43 +125,68 @@
                     aria-describedby="inputGroup-sizing-lg">
             </div>
             <p></p>
-            <button class="btn btn-primary" onclick="saveData()">방명록 등록</button>
+            <button type="button" class="btn btn-primary" onclick="saveData()" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">방명록 등록</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            방명록 등록이 완료되었습니다.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <hr>
             <hr>
             <div class="box">
                 <span>UserID</span>
                 <p class="lh-base">방명록 내용</p>
-                <button class="btnn">삭제</button>
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
+                    삭제
+                </button>
             </div>
             <br>
             <div class="box">
                 <span>UserID</span>
                 <p class="lh-base">방명록 내용</p>
-                <button class="btnn">삭제</button>
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
+                    삭제
+                </button>
             </div>
             <br>
             <div class="box">
                 <span>UserID</span>
                 <p class="lh-base">방명록 내용</p>
-                <button class="btnn">삭제</button>
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
+                    삭제
+                </button>
             </div>
             <br>
             <div class="box">
                 <span>UserID</span>
                 <p class="lh-base">방명록 내용</p>
-                <button class="btnn">삭제</button>
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
+                    삭제
+                </button>
             </div>
             <br>
             <div class="box">
                 <span>UserID</span>
                 <p class="lh-base">방명록 내용</p>
-                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
                     삭제
                 </button>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    <div class="modal fade" id="exampleModals" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
         tabindex="-1"> <!--버튼 누를 경우 id="exampleModalToggle"로 인해 modal 켜짐-->
         <div class="modal-dialog modal-dialog-centered"> <!--modal창 설명-->
             <div class="modal-content">
