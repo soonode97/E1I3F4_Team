@@ -15,6 +15,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Noto+Sans+KR:wght@100..900&display=swap');
 
         .mytitle {
+            background-image: url("https://us.123rf.com/450wm/somosburro/somosburro1801/somosburro180100004/93946079-캐리비안-섬-평면-일러스트-레이션.jpg?ver=6");
             font-family: "Dancing Script", cursive;
             display: grid;
             grid-auto-flow: column;
@@ -32,20 +33,94 @@
             margin: 0 10px;
         }
 
-        .container {
-            margin: 1px;
-            padding: 10px;
+        .introduce {
+            display: flex;
+            flex-direction: column;
+            /* 세로 방향으로 정렬 */
+            align-items: center;
+            /* 수평 중앙 정렬 */
+            justify-content: center;
+            /* 수직 중앙 정렬 */
+            height: 300px;
+            /* 컨테이너의 높이 설정 */
             text-align: center;
-            margin: auto;
+            /* 텍스트 중앙 정렬 */
+            font-family: Arial, sans-serif;
+            /* 폰트 설정 */
+            padding: 20px;
+            /* 안쪽 여백 설정 */
+            border: 1px solid #ccc;
+            /* 테두리 설정 */
+            border-radius: 8px;
+            /* 둥근 테두리 */
+            background-color: #f9f9f9;
+            /* 배경색 설정 */
+        }
+
+        .container {
+            display: flex;
+            /* Flexbox 레이아웃 사용 */
+            justify-content: space-between;
+            /* 아이템 사이에 공간 분배 */
+            padding: 20px;
+            /* 안쪽 여백 설정 */
+            gap: 20px;
+            /* 아이템 사이의 간격 설정 */
         }
 
         .item {
-            text-align: left;
-            display: inline-flex;
-            width: 500px;
-            height: 300px;
-            background-color: skyblue;
-            border: 1px solid black;
+            flex: 1;
+            /* 아이템이 컨테이너의 공간을 균등하게 차지하도록 설정 */
+            padding: 20px;
+            /* 안쪽 여백 설정 */
+            border: 1px solid #ddd;
+            /* 테두리 설정 */
+            border-radius: 8px;
+            /* 둥근 테두리 설정 */
+            background-color: #ebcdae;
+            /* 배경색 설정 */
+        }
+
+        .item h2 {
+            margin-top: 0;
+            /* 제목 위쪽 여백 제거 */
+            margin-bottom: 10px;
+            /* 제목 아래쪽 여백 설정 */
+            font-size: 1.5em;
+            /* 제목 크기 설정 */
+            color: #333;
+            /* 제목 색상 설정 */
+        }
+
+        .item ul {
+            list-style-type: disc;
+            /* 목록 스타일: 원형 점 */
+            padding-left: 20px;
+            /* 목록 왼쪽 여백 설정 */
+        }
+
+        .item li {
+            margin-bottom: 10px;
+            /* 목록 항목 간의 간격 설정 */
+            line-height: 1.6;
+            /* 줄 간격 설정 */
+            font-size: 1em;
+            /* 텍스트 크기 설정 */
+            color: #555;
+            /* 텍스트 색상 설정 */
+        }
+
+        .nav-pills.flex-column {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .nav-pills .nav-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
         }
     </style>
     <script>
@@ -73,34 +148,22 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="home.html" class="nav-link link-dark" aria-current="page">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#home"></use>
-                        </svg>
+                    <a href="home.html" class="nav-link active" aria-current="page">
                         Home
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a href="members.html" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2"></use>
-                        </svg>
                         Members
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a href="join.html" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table"></use>
-                        </svg>
                         Join
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="nav-link active">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#grid"></use>
-                        </svg>
+                <li class="nav-item">
+                    <a href="#" class="nav-link link-dark">
                         Guest's Book
                     </a>
                 </li>
@@ -148,6 +211,12 @@
                     <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
                         alt="..." class="img-thumbnail customimageSize">
                 </div>
+                <div class="introduce">
+                    안녕하세요
+                    <p>저희는 E 1명과 I 3명 그리고 조원 모두가 F인 E1I3F4입니다~~</p>
+                    <p>3명이 전공자고 1명이 비전공자이지만 전 팀원이 목표까지 한 마음으로 차곡차곡 나아가는 팀입니다.</p>
+                </div>
+                <hr>
                 <div class="container">
                     <div class="item">
                         <ul>
