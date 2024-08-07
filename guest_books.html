@@ -59,10 +59,46 @@
             bottom: 10px;
         }
 
-        .book_title {
+        .nav-pills.flex-column {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .nav-pills .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1.guest_title {
+            font-weight: 200;
             padding: 8px 16px;
-            background-color: blue;
-            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1.guest_title span {
+            position: relative;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 10px;
+            border-bottom: 1px solid mediumseagreen;
+        }
+
+        h1.guest_title span:after {
+            content: '';
+            position: absolute;
+            bottom: calc(-100% - 1px);
+            margin-left: -10px;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border-top: 1px solid mediumseagreen;
         }
     </style>
 
@@ -169,13 +205,13 @@
 </head>
 
 <body>
-    <div class="d-flex" style="height: 100vh;">
+    <div class="d-flex" style="height: 100vh">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100%;">
             <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <div class="badge text-bg-primary text-wrap" style="width: 10rem; font-size: large;">
+                <div class="badge text-bg-primary text-wrap" style="width: 8rem; font-size: large;">
                     E1I3F4
                 </div>
             </a>
@@ -186,18 +222,18 @@
                         Home
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a href="members.html" class="nav-link link-dark">
                         Members
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a href="join.html" class="nav-link link-dark">
                         Join
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="nav-link active" aria-current="page">
+                <li class="nav-item">
+                    <a href="guest_books.html" class="nav-link active" aria-current="page">
                         Guest's Book
                     </a>
                 </li>
@@ -222,18 +258,16 @@
         </div>
         <div class="flex-grow-1 p-3">
             <div class="book_title">
-                <div>
-                    방명록 (Guest's Book)
-                </div>
+                <h1 class="guest_title"><span>방명록</span>
             </div>
-            <div class="input-group">
+            <div class="input-group" style="width: 110vh;">
                 <span class="input-group-text">UserID and Password</span>
                 <input type="text" id="book_id" aria-label="UserID" class="form-control" placeholder="UserID">
                 <input type="text" id="book_pass" aria-label="Password" class="form-control"
                     placeholder="Password(방명록 삭제시 필요)">
             </div>
             <p></p>
-            <div class="input-group input-group-lg">
+            <div class="input-group input-group-lg" style="width: 110vh; height: auto;">
                 <span class="input-group-text" id="inputGroup-sizing-lg">방명록 작성</span>
                 <input type="text" id="book_message" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-lg">
