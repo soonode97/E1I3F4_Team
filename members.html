@@ -97,7 +97,7 @@
             border-left: thick solid gray;
             border-color: gray;
             height: 310px;
-            margin-top : 20px;
+            margin-top: 20px;
         }
 
         .nameTextFont {
@@ -119,7 +119,7 @@
             display: none;
             width: 1200px;
             height: 800px;
-            background-color: rgb(115, 223, 126);
+            background-color: skyblue;
             position: absolute;
             top: 50px;
             left: 300px;
@@ -127,6 +127,20 @@
             overflow: auto;
             border-radius: 5%;
         }
+
+        .nav-pills.flex-column {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+        }
+        .nav-pills .nav-item {
+            display:flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: center;
+        }
+
     </style>
 
     <script type="module">
@@ -164,6 +178,8 @@
             let name = row['name'];
             let mbti = row['mbti'];
             let introText = row['introText'];
+            let gitUrl = row['gitUrl'];
+            let blogUrl = row['blogUrl']
 
             let temp_html = `
             <div class="container my-5">
@@ -188,6 +204,24 @@
                             </dl>
                         </div>
                         <div class="col d-flex justify-content-end align-items-end gap-2 p-3">
+                            <button id="moreInfoBtn"
+                                class="d-flex justify-content-end align-items-end btn btn-primary btn-lg p-3 rounded-pill"
+                                type="button">
+                                more info
+                                <svg class="bi ms-2" width="24" height="24">
+                                    <use xlink:href="#arrow-right-short"></use>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col-2 d-flex justify-content-between flex-column align-items-center gap-2 p-3">
+                            <a href="${gitUrl}" height="5" width="10" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" 
+                                alt="GitHub" style="width: 100px;height: 100px;">
+                            </a>
+                            <a href="${blogUrl}" height="5" width="10" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Eo_circle_green_letter-b.svg/120px-Eo_circle_green_letter-b.svg.png?20200417132604" 
+                                alt="Blog" style="width: 100px;height: 100px;">
+                            </a>
                             <button id="moreInfoBtn"
                                 class="d-flex justify-content-end align-items-end btn btn-primary btn-lg p-3 rounded-pill"
                                 type="button">
@@ -239,8 +273,8 @@
             </path>
         </symbol>
     </svg>
-    <div class="d-flex">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+    <div class="d-flex" style="height:100vh">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;height:100%">
             <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
@@ -251,22 +285,22 @@
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item py-5 bd-highlight">
+                <li class="nav-item">
                     <a href="home.html" class="nav-link link-dark" aria-current="page">
                         Home
                     </a>
                 </li>
-                <li class="nav-item py-5 bd-highlight">
+                <li class="nav-item">
                     <a href="members.html" class="nav-link active">
                         Members
                     </a>
                 </li>
-                <li class="nav-item py-5 bd-highlight">
+                <li class="nav-item">
                     <a href="join.html" class="nav-link link-dark">
                         Join
                     </a>
                 </li>
-                <li class="nav-item py-5 bd-highlight">
+                <li class="nav-item">
                     <a href="guest_books.html" class="nav-link link-dark">
                         Guest's Book
                     </a>
@@ -274,8 +308,8 @@
             </ul>
             <hr>
             <div class="dropdown">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>Sparta NodeJS 6기</strong>
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>Sparta NodeJS 6기</strong>
                 </a>
             </div>
         </div>
@@ -285,7 +319,7 @@
                     <div class="row">
                         <div class="col-3 d-flex justify-content-start p-4">
                             <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
-                                alt="..." class="img-thumbnail customimageSize">
+                                alt="..." class="img-thumbnail customimageSize"> 
                         </div>
                         <div class="col-1 v_line px-0" style="width:30px"></div>
                         <div class="col-6 d-flex justify-content-end py-4">
@@ -302,7 +336,15 @@
                                 </dd>
                             </dl>
                         </div>
-                        <div class="col d-flex justify-content-end align-items-end gap-2 p-3">
+                        <div class="col-2 d-flex justify-content-between flex-column align-items-center gap-2 p-3">
+                            <a href="https://github.com/DudeKYH" height="5" width="10" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" 
+                                alt="GitHub" style="width: 100px;height: 100px;">
+                            </a>
+                            <a href="https://velog.io/@kyheon/posts" height="5" width="10" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Eo_circle_green_letter-b.svg/120px-Eo_circle_green_letter-b.svg.png?20200417132604" 
+                                alt="Blog" style="width: 100px;height: 100px;">
+                            </a>
                             <button id="moreInfoBtn"
                                 class="d-flex justify-content-end align-items-end btn btn-primary btn-lg p-3 rounded-pill"
                                 type="button">
@@ -320,14 +362,22 @@
     </div>
     <div id="popup" class="popuppage">
         <div class="row d-flex" style="width:100%;height:100%;">
-                <div class="col-10 d-flex justify-content-start p-3">
-                    <h4> detail introduce myselft Text </h4>
-                </div>
-                <div class="col-2 d-flex justify-content-end align-items-end p-3">
-                    <button id="closeBtn"
-                        class="btn btn-primary btn-lg p-3 m-3 rounded-pill"
-                        type="button">close</button>
+            <div class="col-4 d-flex flex-column p-5">
+                <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
+                    alt="..." class="img-thumbnail" style="width: 400px;height: 400px;">
+                    <div class="row py-4">
+                    <dd class="col-sm-6" style="font-size:30px;text-align: center;">Name</dd> 
+                    <dt class="col-sm-6" style="font-size:30px;text-align: center;">짱구</dt>
+                    <hr style="color:red">
+                    <dd class="col-sm-6" style="font-size:30px; font-weight: bold;text-align: center;">MBTI</dd>
+                    <dt class="col-sm-6" style="font-size:30px; font-weight: bold;text-align: center;">ESTP</dt>
+                    <hr style="color:red">
+                    <p style="font-size:30px; font-weight: bold;text-align: center;">잘 부탁드립니다</p>
                 </div>
             </div>
+            <div class="col-2 d-flex justify-content-end align-items-end p-3">
+                <button id="closeBtn" class="btn btn-primary btn-lg p-3 m-3 rounded-pill" type="button">close</button>
+            </div>
+        </div>
     </div>
 </body>
