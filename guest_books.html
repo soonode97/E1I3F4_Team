@@ -59,23 +59,46 @@
             bottom: 10px;
         }
 
-        .book_title {
-            padding: 8px 16px;
-            background-color: blue;
-            height: 100px;
-        }
-
         .nav-pills.flex-column {
             display: flex;
             flex-direction: column;
             height: 100vh;
         }
+
         .nav-pills .nav-item {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        h1.guest_title {
+            font-weight: 200;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1.guest_title span {
+            position: relative;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 10px;
+            border-bottom: 1px solid mediumseagreen;
+        }
+
+        h1.guest_title span:after {
+            content: '';
+            position: absolute;
+            bottom: calc(-100% - 1px);
+            margin-left: -10px;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border-top: 1px solid mediumseagreen;
         }
     </style>
 
@@ -235,18 +258,16 @@
         </div>
         <div class="flex-grow-1 p-3">
             <div class="book_title">
-                <div>
-                    방명록 (Guest's Book)
-                </div>
+                <h1 class="guest_title"><span>방명록</span>
             </div>
-            <div class="input-group">
+            <div class="input-group" style="width: 110vh;">
                 <span class="input-group-text">UserID and Password</span>
                 <input type="text" id="book_id" aria-label="UserID" class="form-control" placeholder="UserID">
                 <input type="text" id="book_pass" aria-label="Password" class="form-control"
                     placeholder="Password(방명록 삭제시 필요)">
             </div>
             <p></p>
-            <div class="input-group input-group-lg">
+            <div class="input-group input-group-lg" style="width: 110vh; height: auto;">
                 <span class="input-group-text" id="inputGroup-sizing-lg">방명록 작성</span>
                 <input type="text" id="book_message" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-lg">
