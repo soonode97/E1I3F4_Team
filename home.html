@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E1I3F4</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+        .mytitle {
+            background-image: url("https://us.123rf.com/450wm/somosburro/somosburro1801/somosburro180100004/93946079-캐리비안-섬-평면-일러스트-레이션.jpg?ver=6");
+            font-family: "Dancing Script", cursive;
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-columns: 1fr;
+            text-align: center;
+            align-items: center;
+        }
+
+        .tem {
+            float: left;
+        }
+
+        .image {
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .introduce {
+            display: flex;
+            flex-direction: column;
+            /* 세로 방향으로 정렬 */
+            align-items: center;
+            /* 수평 중앙 정렬 */
+            justify-content: center;
+            /* 수직 중앙 정렬 */
+            height: 300px;
+            /* 컨테이너의 높이 설정 */
+            text-align: center;
+            /* 텍스트 중앙 정렬 */
+            font-family: Arial, sans-serif;
+            /* 폰트 설정 */
+            padding: 20px;
+            /* 안쪽 여백 설정 */
+            border: 1px solid #ccc;
+            /* 테두리 설정 */
+            border-radius: 8px;
+            /* 둥근 테두리 */
+            background-color: #f9f9f9;
+            /* 배경색 설정 */
+        }
+
+        .container {
+            display: flex;
+            /* Flexbox 레이아웃 사용 */
+            justify-content: space-between;
+            /* 아이템 사이에 공간 분배 */
+            padding: 20px;
+            /* 안쪽 여백 설정 */
+            gap: 20px;
+            /* 아이템 사이의 간격 설정 */
+        }
+
+        .item {
+            flex: 1;
+            /* 아이템이 컨테이너의 공간을 균등하게 차지하도록 설정 */
+            padding: 20px;
+            /* 안쪽 여백 설정 */
+            border: 1px solid #ddd;
+            /* 테두리 설정 */
+            border-radius: 8px;
+            /* 둥근 테두리 설정 */
+            background-color: #ebcdae;
+            /* 배경색 설정 */
+        }
+
+        .item h2 {
+            margin-top: 0;
+            /* 제목 위쪽 여백 제거 */
+            margin-bottom: 10px;
+            /* 제목 아래쪽 여백 설정 */
+            font-size: 1.5em;
+            /* 제목 크기 설정 */
+            color: #333;
+            /* 제목 색상 설정 */
+        }
+
+        .item ul {
+            list-style-type: disc;
+            /* 목록 스타일: 원형 점 */
+            padding-left: 20px;
+            /* 목록 왼쪽 여백 설정 */
+        }
+
+        .item li {
+            margin-bottom: 10px;
+            /* 목록 항목 간의 간격 설정 */
+            line-height: 1.6;
+            /* 줄 간격 설정 */
+            font-size: 1em;
+            /* 텍스트 크기 설정 */
+            color: #555;
+            /* 텍스트 색상 설정 */
+        }
+
+        .nav-pills.flex-column {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .nav-pills .nav-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            let url = "http://spartacodingclub.shop/sparta_api/weather/seoul";
+            fetch(url).then(res => res.json()).then(data => {
+                let temp = data['temp'];
+                $('#temperature').text(temp)
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+            <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <div class="badge text-bg-primary text-wrap" style="width: 8rem; font-size: large;">
+                    E1I3F4
+                </div>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="home.html" class="nav-link active" aria-current="page">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="members.html" class="nav-link link-dark">
+                        Members
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="join.html" class="nav-link link-dark">
+                        Join
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link link-dark">
+                        Guest's Book
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>mdo</strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex-grow-1 p-3">
+            <div class="mytitle">
+                <h1>E1I3F4</h1>
+                <div class="tem">현재서울기온: <span id="temperature"></span>&#8451;</div>
+                <button type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-github" viewBox="0 0 16 16">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <hr>
+            <div class="image">
+                <div class="upload-section">
+                    <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
+                        alt="..." class="img-thumbnail customimageSize">
+                    <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
+                        alt="..." class="img-thumbnail customimageSize">
+                    <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
+                        alt="..." class="img-thumbnail customimageSize">
+                    <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
+                        alt="..." class="img-thumbnail customimageSize">
+                </div>
+                <div class="introduce">
+                    안녕하세요
+                    <p>저희는 E 1명과 I 3명 그리고 조원 모두가 F인 E1I3F4입니다~~</p>
+                    <p>3명이 전공자고 1명이 비전공자이지만 전 팀원이 목표까지 한 마음으로 차곡차곡 나아가는 팀입니다.</p>
+                </div>
+                <hr>
+                <div class="container">
+                    <div class="item">
+                        <ul>
+                            <h2>규칙</h2>
+                            <li>오전 / 오후 / 저녁 회의 시, 계획표 함께 작성하기.</li>
+                            <li>본인이 참여된 내용에는 담당자 및 참여자로 사용자 할당하기</li>
+                            <li>소통 잘하고 상처 받는 말 하지 말기.</li>
+                            <li>피드백을 요청하면 긍정/부정에 관계 없이 확실하게 답변하기.</li>
+                            <li>누구 한명이라도 모르는 것이 있으면 짚고 넘어가기.</li>
+                            <li>모르는 내용이 있다면 제일 먼저 검색 후 그래도 모른다면 튜터님 혹은 팀원에게 물어보기.</li>
+                            <li>정보 공유를 잘하기.</li>
+                        </ul>
+                    </div>
+                    <div class="item">
+                        <ul>
+                            <h2>목표</h2>
+                            <li>최종 완성: 2024/08/08 자정까지를 목표로.</li>
+                            <li>배운 내용을 잘 활용해보기: CRUD 기능, fetch 기능</li>
+                            <li>배우지 않은 것도 검색해보며 구현 해보기</li>
+                            <li>포기하지 않고 목표 달성하기</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
