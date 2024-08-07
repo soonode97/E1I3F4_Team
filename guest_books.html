@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background: #FFEFBA;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFFFFF, #FFEFBA);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
+        .box {
+            width: 80%;
+            margin: 2em auto;
+            padding: 2em;
+            position: relative;
+            padding: 1.5em !important;
+            z-index: 0;
+            background-color: #efede9;
+            border-radius: 13px;
+        }
+
+        .box:before {
+            position: absolute;
+            border: 2px dashed #A7A297;
+            content: '';
+            display: block;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            margin: 5px;
+            z-index: -1;
+            border-radius: 10px;
+        }
+
+        .btnn {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            bottom: 10px;
+        }
+
+        .nav-pills.flex-column {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .nav-pills .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1.guest_title {
+            font-weight: 200;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1.guest_title span {
+            position: relative;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 10px;
+            border-bottom: 1px solid mediumseagreen;
+        }
+
+        h1.guest_title span:after {
+            content: '';
+            position: absolute;
+            bottom: calc(-100% - 1px);
+            margin-left: -10px;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border-top: 1px solid mediumseagreen;
+        }
+    </style>
+
+    <script type="module">
+        // Firebase SDK libraries
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCItPndchYmi3XY3KRjXe4_9TRjlHvfGIY",
+            authDomain: "e1i3f4-test.firebaseapp.com",
+            projectId: "e1i3f4-test",
+            storageBucket: "e1i3f4-test.appspot.com",
+            messagingSenderId: "999423562309",
+            appId: "1:999423562309:web:4b65dd842b877d45d6092c",
+            measurementId: "G-KEMHG56NXK"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 파이어스토어에 데이터 저장
+        $("#regisbtn").click(async function saveData() {
+            const userId = document.getElementById('book_id').value;
+            const password = document.getElementById('book_pass').value;
+            const message = document.getElementById('book_message').value;
+
+            try {
+                await addDoc(collection(db, "guest_books"), {
+                    userId: userId,
+                    password: password,
+                    message: message
+                });
+                document.getElementById('book_id').value = '';
+                document.getElementById('book_pass').value = '';
+                document.getElementById('book_message').value = '';
+            } catch (error) {
+                console.error('Error saving data:', error);
+            }
+            $(document).ready(function () {
+                fetchGuestBooks();
+            });
+        });
+
+        // 파이어스토어에서 데이터를 fetch
+        async function fetchGuestBooks() {
+            const querySnapshot = await getDocs(collection(db, "guest_books"));
+            const guestBookContainer = document.getElementById('guestBookContainer');
+            guestBookContainer.innerHTML = ''; // Clear existing content
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const guestBookEntry = `
+        <div class="box">
+            <span style="font-size: 200%">${data.userId}</span>
+            <p class="lh-base">${data.message}</p>
+            <button class="btnn btn-primary" id="delbtn" data-bs-toggle="modal" data-bs-target="#delModal" onclick="prepareDelete('${doc.id}', '${data.userId}', '${data.password}')">삭제</button>
+        </div>
+        <br>`;
+                guestBookContainer.innerHTML += guestBookEntry;
+            });
+        }
+
+        // 제거를 위한 전역변수 선언
+        window.prepareDelete = function (docId, userId, password) {
+            window.currentDocId = docId;
+            window.currentDocPassword = password;
+
+            // 제거 Modal에 userid와 password 설정
+            const maskedUserId = userId.slice(0, -2) + '**';
+
+            // 제거 Modal에 maskedUserId와 초기화된 password 설정
+            document.getElementById('modal-user-id').textContent = maskedUserId;
+            document.getElementById('valid-password').value = ''; // Clear previous value
+        };
+
+        // 파이어스토어에서 데이터 제거
+        $("#book_del").click(async function deleteData() {
+            const enteredPassword = document.getElementById('valid-password').value;
+
+            if (enteredPassword === window.currentDocPassword) {
+                try {
+                    await deleteDoc(doc(db, "guest_books", window.currentDocId));
+                    document.getElementById('valid-password').value = '';
+                    $('#delModal').modal('hide');
+                    $('#delCheck').modal('show');
+                    fetchGuestBooks();
+                } catch (error) {
+                    console.error('Error deleting data:', error);
+                }
+            } else {
+                $('#delModal').modal('hide');
+                $('#del_nonCheck').modal('show');
+                fetchGuestBooks();
+            }
+        });
+
+        $(document).ready(function () {
+            fetchGuestBooks();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="d-flex" style="height: 100vh">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100%;">
+            <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <div class="badge text-bg-primary text-wrap" style="width: 8rem; font-size: large;">
+                    E1I3F4
+                </div>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="home.html" class="nav-link link-dark">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="members.html" class="nav-link link-dark">
+                        Members
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="join.html" class="nav-link link-dark">
+                        Join
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="guest_books.html" class="nav-link active" aria-current="page">
+                        Guest's Book
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>mdo</strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex-grow-1 p-3">
+            <div class="book_title">
+                <h1 class="guest_title"><span>방명록</span>
+            </div>
+            <div class="input-group" style="width: 110vh;">
+                <span class="input-group-text">UserID and Password</span>
+                <input type="text" id="book_id" aria-label="UserID" class="form-control" placeholder="UserID">
+                <input type="text" id="book_pass" aria-label="Password" class="form-control"
+                    placeholder="Password(방명록 삭제시 필요)">
+            </div>
+            <p></p>
+            <div class="input-group input-group-lg" style="width: 110vh; height: auto;">
+                <span class="input-group-text" id="inputGroup-sizing-lg">방명록 작성</span>
+                <input type="text" id="book_message" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-lg">
+            </div>
+            <p></p>
+            <button type="button" class="btn btn-primary" id="regisbtn" data-bs-toggle="modal"
+                data-bs-target="#regisModal">방명록 등록</button>
+            <hr>
+            <hr>
+            <div id="guestBookContainer"></div>
+        </div>
+
+        <!--방명록 등록 Modal-->
+        <div class="modal fade" id="regisModal" tabindex="-1" aria-labelledby="regisModal_title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-3 shadow">
+                    <div class="modal-body p-4 text-center">
+                        <h5 class="mb-0">방명록 등록이 완료되었습니다.</h5>
+                    </div>
+                    <div class="modal-footer flex-nowrap p-0">
+                        <button type="button"
+                            class="btn btn-lg btn-link fs-6 text-decoration-none col-3 py-3 m-0 rounded-0 border-end"
+                            data-bs-dismiss="modal"><strong>Close</strong></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 방명록 삭제 Modal -->
+        <div class="modal fade" id="delModal" aria-hidden="true" aria-labelledby="delModalLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>방명록 삭제를 위해 등록 시 설정한 Password를 입력해 주세요.</p>
+                        <div class="mb-3">
+                            <label for="modal-user-id" class="col-form-label">UserID:</label>
+                            <span id="modal-user-id" class="form-control-plaintext"></span>
+                        </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="valid-password" class="col-form-label">Password:</label>
+                                <input type="text" class="form-control" id="valid-password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="book_del">삭제</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="delCheck" aria-hidden="true" aria-labelledby="delCheckLabel1" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        삭제 완료했습니다.
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="del_nonCheck" aria-hidden="true" aria-labelledby="delCheckLabel2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="delCheckLabel2">삭제 실패</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        비밀번호가 다릅니다. 비밀 번호를 다시 확인해주시기 바랍니다.
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delModal">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
