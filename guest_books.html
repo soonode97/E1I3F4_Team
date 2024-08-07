@@ -12,12 +12,39 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        body {
+            background: #FFEFBA;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFFFFF, #FFEFBA);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
         .box {
-            width: 90%;
-            padding: 20px;
-            border: 2px solid #000;
-            background-color: #f0f0f0;
+            width: 80%;
+            margin: 2em auto;
+            padding: 2em;
             position: relative;
+            padding: 1.5em !important;
+            z-index: 0;
+            background-color: #efede9;
+            border-radius: 13px;
+        }
+
+        .box:before {
+            position: absolute;
+            border: 2px dashed #A7A297;
+            content: '';
+            display: block;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            margin: 5px;
+            z-index: -1;
+            border-radius: 10px;
         }
 
         .btnn {
@@ -25,66 +52,152 @@
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 7px;
             cursor: pointer;
             position: absolute;
             right: 20px;
-            bottom: 0%;
-            transform: translateY(-50%);
+            bottom: 10px;
         }
 
         .book_title {
             padding: 8px 16px;
             background-color: blue;
-            height: 15%;
+            height: 100px;
         }
     </style>
 
+    <script type="module">
+        // Firebase SDK libraries
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCItPndchYmi3XY3KRjXe4_9TRjlHvfGIY",
+            authDomain: "e1i3f4-test.firebaseapp.com",
+            projectId: "e1i3f4-test",
+            storageBucket: "e1i3f4-test.appspot.com",
+            messagingSenderId: "999423562309",
+            appId: "1:999423562309:web:4b65dd842b877d45d6092c",
+            measurementId: "G-KEMHG56NXK"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 파이어스토어에 데이터 저장
+        $("#regisbtn").click(async function saveData() {
+            const userId = document.getElementById('book_id').value;
+            const password = document.getElementById('book_pass').value;
+            const message = document.getElementById('book_message').value;
+
+            try {
+                await addDoc(collection(db, "guest_books"), {
+                    userId: userId,
+                    password: password,
+                    message: message
+                });
+                document.getElementById('book_id').value = '';
+                document.getElementById('book_pass').value = '';
+                document.getElementById('book_message').value = '';
+            } catch (error) {
+                console.error('Error saving data:', error);
+            }
+            $(document).ready(function () {
+                fetchGuestBooks();
+            });
+        });
+
+        // 파이어스토어에서 데이터를 fetch
+        async function fetchGuestBooks() {
+            const querySnapshot = await getDocs(collection(db, "guest_books"));
+            const guestBookContainer = document.getElementById('guestBookContainer');
+            guestBookContainer.innerHTML = ''; // Clear existing content
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const guestBookEntry = `
+        <div class="box">
+            <span style="font-size: 200%">${data.userId}</span>
+            <p class="lh-base">${data.message}</p>
+            <button class="btnn btn-primary" id="delbtn" data-bs-toggle="modal" data-bs-target="#delModal" onclick="prepareDelete('${doc.id}', '${data.userId}', '${data.password}')">삭제</button>
+        </div>
+        <br>`;
+                guestBookContainer.innerHTML += guestBookEntry;
+            });
+        }
+
+        // 제거를 위한 전역변수 선언
+        window.prepareDelete = function (docId, userId, password) {
+            window.currentDocId = docId;
+            window.currentDocPassword = password;
+
+            // 제거 Modal에 userid와 password 설정
+            const maskedUserId = userId.slice(0, -2) + '**';
+
+            // 제거 Modal에 maskedUserId와 초기화된 password 설정
+            document.getElementById('modal-user-id').textContent = maskedUserId;
+            document.getElementById('valid-password').value = ''; // Clear previous value
+        };
+
+        // 파이어스토어에서 데이터 제거
+        $("#book_del").click(async function deleteData() {
+            const enteredPassword = document.getElementById('valid-password').value;
+
+            if (enteredPassword === window.currentDocPassword) {
+                try {
+                    await deleteDoc(doc(db, "guest_books", window.currentDocId));
+                    document.getElementById('valid-password').value = '';
+                    $('#delModal').modal('hide');
+                    $('#delCheck').modal('show');
+                    fetchGuestBooks();
+                } catch (error) {
+                    console.error('Error deleting data:', error);
+                }
+            } else {
+                $('#delModal').modal('hide');
+                $('#del_nonCheck').modal('show');
+                fetchGuestBooks();
+            }
+        });
+
+        $(document).ready(function () {
+            fetchGuestBooks();
+        });
+    </script>
 </head>
 
 <body>
-
-    <div class="d-flex">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+    <div class="d-flex" style="height: 100vh;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100%;">
             <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <div class="badge text-bg-primary text-wrap" style="width: 8rem; font-size: large;">
+                <div class="badge text-bg-primary text-wrap" style="width: 10rem; font-size: large;">
                     E1I3F4
                 </div>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="home.html" class="nav-link link-dark" aria-current="page">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#home"></use>
-                        </svg>
+                    <a href="home.html" class="nav-link link-dark">
                         Home
                     </a>
                 </li>
                 <li>
                     <a href="members.html" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2"></use>
-                        </svg>
                         Members
                     </a>
                 </li>
                 <li>
                     <a href="join.html" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table"></use>
-                        </svg>
                         Join
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link active">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#grid"></use>
-                        </svg>
+                    <a href="#" class="nav-link active" aria-current="page">
                         Guest's Book
                     </a>
                 </li>
@@ -121,115 +234,87 @@
             </div>
             <p></p>
             <div class="input-group input-group-lg">
-                <span class="input-group-text" id="inputGroup-sizing-lg">작성</span>
+                <span class="input-group-text" id="inputGroup-sizing-lg">방명록 작성</span>
                 <input type="text" id="book_message" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-lg">
             </div>
             <p></p>
-            <button type="button" class="btn btn-primary" onclick="saveData()" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">방명록 등록</button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            방명록 등록이 완료되었습니다.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
+            <button type="button" class="btn btn-primary" id="regisbtn" data-bs-toggle="modal"
+                data-bs-target="#regisModal">방명록 등록</button>
+            <hr>
+            <hr>
+            <div id="guestBookContainer"></div>
+        </div>
+
+        <!--방명록 등록 Modal-->
+        <div class="modal fade" id="regisModal" tabindex="-1" aria-labelledby="regisModal_title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-3 shadow">
+                    <div class="modal-body p-4 text-center">
+                        <h5 class="mb-0">방명록 등록이 완료되었습니다.</h5>
+                    </div>
+                    <div class="modal-footer flex-nowrap p-0">
+                        <button type="button"
+                            class="btn btn-lg btn-link fs-6 text-decoration-none col-3 py-3 m-0 rounded-0 border-end"
+                            data-bs-dismiss="modal"><strong>Close</strong></button>
                     </div>
                 </div>
             </div>
-            <hr>
-            <hr>
-            <div class="box">
-                <span>UserID</span>
-                <p class="lh-base">방명록 내용</p>
-                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
-                    삭제
-                </button>
-            </div>
-            <br>
-            <div class="box">
-                <span>UserID</span>
-                <p class="lh-base">방명록 내용</p>
-                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
-                    삭제
-                </button>
-            </div>
-            <br>
-            <div class="box">
-                <span>UserID</span>
-                <p class="lh-base">방명록 내용</p>
-                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
-                    삭제
-                </button>
-            </div>
-            <br>
-            <div class="box">
-                <span>UserID</span>
-                <p class="lh-base">방명록 내용</p>
-                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
-                    삭제
-                </button>
-            </div>
-            <br>
-            <div class="box">
-                <span>UserID</span>
-                <p class="lh-base">방명록 내용</p>
-                <button type="button" class="btnn" data-bs-toggle="modal" data-bs-target="#exampleModals">
-                    삭제
-                </button>
-            </div>
         </div>
-    </div>
-    <div class="modal fade" id="exampleModals" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1"> <!--버튼 누를 경우 id="exampleModalToggle"로 인해 modal 켜짐-->
-        <div class="modal-dialog modal-dialog-centered"> <!--modal창 설명-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">방명록 삭제</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    방명록 삭제를 위해 등록 시 설정한 Password를 입력해 주세요.
-                    <form>
+
+        <!-- 방명록 삭제 Modal -->
+        <div class="modal fade" id="delModal" aria-hidden="true" aria-labelledby="delModalLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>방명록 삭제를 위해 등록 시 설정한 Password를 입력해 주세요.</p>
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Password:</label>
-                            <input type="text" class="form-control" id="valid-password">
+                            <label for="modal-user-id" class="col-form-label">UserID:</label>
+                            <span id="modal-user-id" class="form-control-plaintext"></span>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                        data-bs-toggle="modal">삭제</button> <!--버튼 클릭 시 exampleModalToggle2로 이동-->
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-        tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">삭제 성공</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    삭제 완료했습니다.
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                        <form>
+                            <div class="mb-3">
+                                <label for="valid-password" class="col-form-label">Password:</label>
+                                <input type="text" class="form-control" id="valid-password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="book_del">삭제</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="modal fade" id="delCheck" aria-hidden="true" aria-labelledby="delCheckLabel1" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        삭제 완료했습니다.
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="del_nonCheck" aria-hidden="true" aria-labelledby="delCheckLabel2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="delCheckLabel2">삭제 실패</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        비밀번호가 다릅니다. 비밀 번호를 다시 확인해주시기 바랍니다.
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delModal">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>
