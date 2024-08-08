@@ -31,8 +31,25 @@
         justify-content: center;
     }
 
-    /* 부모 컨테이너에 대한 스타일 설정 */
     .container {
+        display: flex;
+        flex-direction: column;
+        /* Flexbox 활성화 */
+        justify-content: center;
+        /* 요소들을 왼쪽 정렬 */
+        align-items: center;
+        /* 요소들을 상단 정렬 */
+        margin-bottom: 100px;
+    }
+
+    header {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .section {
         display: flex;
         /* Flexbox 활성화 */
         justify-content: center;
@@ -41,7 +58,6 @@
         /* 요소들을 상단 정렬 */
         padding: 20px;
         background-color: white;
-        margin-top: 100px;
     }
 
     /* 이미지 업로드와 input 요소들에 대한 스타일 설정 */
@@ -171,49 +187,55 @@
                 </a>
             </div>
         </div>
-        <div class="container">
-            <div class="upload-section">
-                <div class="image-preview" id="image-preview">
-                    <img id="preview-image" src="" alt="Image Preview">
-                    <input type="file" id="imgFile-upload" class="upload-input" accept="image/*">
+        <div class = "container">
+            <header>
+                <p style="font-size: 40px;">멤버 등록</p>
+            </header>
+            <div class="section">
+                <div class="upload-section">
+                    <div class="image-preview" id="image-preview">
+                        <img id="preview-image" src="" alt="Image Preview">
+                        <input type="file" id="imgFile-upload" class="upload-input" accept="image/*">
+                    </div>
+                    <div class="placeholder-text">Click to select image</div>
+                    <button id="delete-button" class="delete-button">Delete</button>
                 </div>
-                <div class="placeholder-text">Click to select image</div>
-                <button id="delete-button" class="delete-button">Delete</button>
-            </div>
-            <div class="input-section">
-                <div class="input-wrapper">
-                    <label for="name">이름 :</label>
-                    <input type="text" id="name">
+                <div class="input-section">
+                    <div class="input-wrapper">
+                        <label for="name">이름 :</label>
+                        <input type="text" id="name">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="mbti">MBTI :</label>
+                        <input type="text" id="mbti">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="intro">간단 소개 :</label>
+                        <input type="text" id="intro">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="gitUrl">깃헙 링크 :</label>
+                        <input type="url" id="gitUrl">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="blogUrl">블로그 링크 :</label>
+                        <input type="url" id="blogUrl">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="userID">아이디 :</label>
+                        <input type="id" id="userID">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="userPW">팀 암호 :</label>
+                        <input type="password" id="userPW">
+                    </div>
+                    <div class="input-wrapper right-align">
+                        <msg id="validMsg"></msg>
+                        <button type="button" class="btn btn-primary" id="registBtn">등록</button>
+                    </div>
                 </div>
-                <div class="input-wrapper">
-                    <label for="mbti">MBTI :</label>
-                    <input type="text" id="mbti">
-                </div>
-                <div class="input-wrapper">
-                    <label for="intro">간단 소개 :</label>
-                    <input type="text" id="intro">
-                </div>
-                <div class="input-wrapper">
-                    <label for="gitUrl">깃헙 링크 :</label>
-                    <input type="url" id="gitUrl">
-                </div>
-                <div class="input-wrapper">
-                    <label for="blogUrl">블로그 링크 :</label>
-                    <input type="url" id="blogUrl">
-                </div>
-                <div class="input-wrapper">
-                    <label for="userID">아이디 :</label>
-                    <input type="id" id="userID">
-                </div>
-                <div class="input-wrapper">
-                    <label for="userPW">팀 암호 :</label>
-                    <input type="password" id="userPW">
-                </div>
-                <div class="input-wrapper right-align">
-                    <msg id="validMsg"></msg>
-                    <button type="button" class="btn btn-primary" id="registBtn">멤버 등록</button>
-                </div>
-            </div>
+        </div>
+        
 
             <!--멤버 등록 Modal-->
             <div class="modal fade" id="registedModal" aria-hidden="true" tabindex="-1">
