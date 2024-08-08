@@ -11,6 +11,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Noto+Sans+KR:wght@100..900&display=swap');
 
@@ -29,12 +30,25 @@
         }
 
         .tem {
-            float: left;
+            font-size: 1.2rem;
+            color: #666;
+            margin: 10px 0;
         }
 
         .image {
             text-align: center;
             margin: 0 10px;
+        }
+
+        .customimageSize {
+            width: 250px;
+            /* 원하는 너비 */
+            height: 250px;
+            /* 원하는 높이 */
+            object-fit: cover;
+            /* 이미지 비율 유지 */
+            margin: 5px;
+            /* 이미지 사이에 간격 추가 */
         }
 
         .introduce {
@@ -173,33 +187,32 @@
                 <img src="https://pds.saramin.co.kr/company/logo/202203/10/r8irhx_27rz-iuruh_logo.png" alt="" width="32"
                     height="32" class="rounded-circle me-2">
                 <strong>Sparta NodeJS 6기</strong>
+
                 </a>
             </div>
         </div>
         <div class="flex-grow-1 p-3">
-            <div class="mytitle">
-                <h1>E1I3F4</h1>
-                <div class="tem">현재서울기온: <span id="temperature"></span>&#8451;</div>
-                <button type="button" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-github" viewBox="0 0 16 16">
-                        <path
-                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8">
-                        </path>
-                    </svg>
-                </button>
+            <div>
+                <div class="mytitle">
+                    <h1>E1I3F4</h1>
+                    <div class="tem">현재서울기온: <span id="temperature"></span>&#8451;</div>
+                    <a href="https://github.com/soonode97/E1I3F4_Team" class="btn btn-secondary" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-github" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
             </div>
             <hr>
-            <div class="image">
+            <div class="image" id="myImage" alt="Firebase Storage Image">
                 <div class="upload-section">
-                    <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
-                        alt="..." class="img-thumbnail customimageSize">
-                    <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
-                        alt="..." class="img-thumbnail customimageSize">
-                    <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
-                        alt="..." class="img-thumbnail customimageSize">
-                    <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
-                        alt="..." class="img-thumbnail customimageSize">
+                    <img src="" alt="..." class="img-thumbnail customimageSize">
+                    <img src="" alt="..." class="img-thumbnail customimageSize">
+                    <img src="" alt="..." class="img-thumbnail customimageSize">
+                    <img src="" alt="..." class="img-thumbnail customimageSize">
                 </div>
                 <div class="introduce">
                     안녕하세요
@@ -232,6 +245,49 @@
                 </div>
             </div>
         </div>
+    </div>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+        import { getStorage, ref, uploadString, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB9HJvVGqIT-q9O_98bLmPkJcnB6VYkVks",
+            authDomain: "e1i3f4-5cb7b.firebaseapp.com",
+            projectId: "e1i3f4-5cb7b",
+            storageBucket: "e1i3f4-5cb7b.appspot.com",
+            messagingSenderId: "416738809409",
+            appId: "1:416738809409:web:fcfca343f2c00460de98c0",
+            measurementId: "G-WSM2VS15FC"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+
+        const fetchImageUrls = async () => {
+            try {
+                // 여러 이미지의 상대 경로를 설정
+                const filePaths = [
+                    'members/NSHkw.png',
+                    'members/kyheon.png',
+                    'members/soobin951.png',
+                    'members/souya1300.png'
+                ];
+
+                // 각 이미지의 URL을 가져와서 <img> 태그에 설정
+                for (let i = 0; i < filePaths.length; i++) {
+                    const imageRef = ref(storage, filePaths[i]);
+                    const url = await getDownloadURL(imageRef);
+                    // 해당 이미지의 <img> 태그에 URL을 설정
+                    document.querySelectorAll('.upload-section img')[i].src = url;
+                }
+            } catch (error) {
+                console.error("Error fetching image URLs:", error);
+            }
+        };
+
+        // 문서가 로드된 후 이미지 URL을 가져옴
+        document.addEventListener('DOMContentLoaded', fetchImageUrls);
+    </script>
 </body>
 
 </html>
