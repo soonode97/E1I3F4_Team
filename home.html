@@ -14,6 +14,10 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Noto+Sans+KR:wght@100..900&display=swap');
 
+        * {
+            font-family: "Dongle", sans-serif;
+        }
+
         .mytitle {
             background-image: url("https://us.123rf.com/450wm/somosburro/somosburro1801/somosburro180100004/93946079-캐리비안-섬-평면-일러스트-레이션.jpg?ver=6");
             font-family: "Dancing Script", cursive;
@@ -110,13 +114,13 @@
             /* 텍스트 색상 설정 */
         }
 
-        .nav-pills.flex-column {
+        .nav {
             display: flex;
             flex-direction: column;
             height: 100vh;
         }
 
-        .nav-pills .nav-item {
+        .nav-item {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -137,14 +141,10 @@
 <body>
     <div class="d-flex">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-            <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-                <div class="badge text-bg-primary text-wrap" style="width: 8rem; font-size: large;">
-                    E1I3F4
-                </div>
-            </a>
+            <div class="d-flex justify-content-center"
+                style="width: 100%; font-size: 50px; font-family:Dancing Script, cursive;">
+                E1I3F4
+            </div>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
@@ -169,21 +169,11 @@
                 </li>
             </ul>
             <hr>
-            <div class="dropdown">
-                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>mdo</strong>
+            <div class="spartaIcon">
+                <img src="https://pds.saramin.co.kr/company/logo/202203/10/r8irhx_27rz-iuruh_logo.png" alt="" width="32"
+                    height="32" class="rounded-circle me-2">
+                <strong>Sparta NodeJS 6기</strong>
                 </a>
-                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
             </div>
         </div>
         <div class="flex-grow-1 p-3">

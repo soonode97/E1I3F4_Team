@@ -167,6 +167,11 @@
             measurementId: "G-WSM2VS15FC"
         };
 
+        // 각 멤버 자유양식 초기화
+        let html_soobin = ``;
+        let html_NSHkw = ``;
+        let html_kyheon = ``;
+        let html_seunjun = ``;
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -176,6 +181,7 @@
         let docs = await getDocs(collection(db, "MemberInfo"));
         //let arr = docs.lengh크기만큼 배열
         //console.log(docs.d) 'userID' 'html'
+        let row;
 
         let testDetailInfo = `
             <div id="popup" class="popuppage">
@@ -258,18 +264,19 @@
             </div>
             `;
 
-            var detailPopupInfoArr = {};
-            detailPopupInfoArr['kyheon'] = testDetailInfo;
+        var detailPopupInfoArr = {};
+        // detailPopupInfoArr['kyheon'] = testDetailInfo;
 
         docs.forEach(async (doc) => {
-            let row = doc.data();
+            row = doc.data();
+            console.log(row);
 
             const name = row['name'];
             const mbti = row['mbti'];
             const introText = row['introText'];
             const gitUrl = row['gitUrl'];
             const blogUrl = row['blogUrl']
-            const userID =  row['userID'];
+            const userID = row['userID'];
 
             const imageFileURL = "members/" + userID + ".png";
             const imageUrl = await getDownloadURL(ref(storage, imageFileURL));
@@ -277,7 +284,7 @@
             const blob = await response.blob();
             const image = URL.createObjectURL(blob);
 
-
+            // 멤버 리스트에 출력되는 카드 양식
             const memberCardInfo = `
             <div class="container my-5">
                 <div class="p-1 text-center bg-body-tertiary rounded-3">
@@ -322,45 +329,96 @@
                 </div>
             </div>
             <div class="b-example-divider"></div>`;
-
-            // 팝업창 HTML 양식
-            const detailPopupInfo = detailPopupInfoArr['kyheon'];
-
             $('#memberCard').append(memberCardInfo);
-            $('#popupgroup').append(detailPopupInfo);
+
+            // $('#popupgroup').append(testDetailInfo);
+
+            // 수빈 카드 양식
+            if (userID === 'soobin951') {
+                html_soobin = `<div class="row d-flex" style="margin:50px;">
+            <div class="row d-flex">
+                <h1 style="
+            caret-color: rgb(55, 53, 47);
+            font-size: 25px;
+            font-weight: inherit;"> 안녕하세요 윤수빈입니다!
+                </h1>
+            </div>
+            <div class="row d-flex" style="margin-top:10px;">
+                <img src="${image}"
+                    style="width: 340px; height: 453px; margin-top:10px;">
+                <div class="col-7 d-flex flex-column" style="margin-left:10px;">
+                    <ul style="font-size: 20px; text-align: left;">
+                        📧 Email <br> soonode951@gmali.com
+                    </ul>
+                    <ul style="font-size: 20px; text-align: left;">
+                        😆 Favortie <br>
+                        <div class="d-flex flex-row" style="width:100%;">
+                            <figure style="margin:5px;">
+                                <img src=""
+                                    alt="Image 1" style="max-width: 100%; height: auto; border: 1px solid #cfcfcf;">
+                                <figcaption style="font-size: 15px; color:#1f1f1f; text-align: center;">게임</figcaption>
+                            </figure>
+                            <figure style="margin:5px;">
+                                <img src=""
+                                    alt="Image 1" style="max-width: 100%; height: auto; border: 1px solid #cfcfcf;">
+                                <figcaption style="font-size: 15px; color:#1f1f1f; text-align: center;">요리</figcaption>
+                            </figure>
+                            <figure style="margin:5px;">
+                                <img src="" alt="Image 1"
+                                    style="max-width: 100%; height: auto; border: 1px solid #cfcfcf;">
+                                <figcaption style="font-size: 15px; color:#1f1f1f; text-align: center;">동물</figcaption>
+                            </figure>
+                        </div>
+                    </ul>
+                    <ul style="font-size: 20px; text-align: left;">
+                        🙌 소개 <br>
+                        <div style="border:1px; border-color: #1f1f1f;">장르 구분없이 게임을 즐겨 합니다. 취미로 요리하는 것을 즐겨하고 특히 주말 전에는
+                            맛있는 요리와 함께 스트레스를 해소하는걸 좋아합니다!
+                            개발 경험은 부족하지만 열심히 배워서 따라가겠습니다. </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="row-1 d-flex justify-content-end">
+                <button id="closeBtn" class="btn btn-primary btn-sm p-3 m-3 rounded-pill" type="button">close</button>
+            </div>
+        </div>`;
+            }
+            else if (userID === 'NSHkw') {
+                html_NSHkw = ` `;
+            }
+            else if (userID === 'kyheon') {
+                html_kyheon = ` `;
+            }
+            else if (userID === 'seunjun') {
+                html_seunjun = ` `;
+            }
         });
 
-        for (const i = 0; i < Object.keys(detailPopupInfoArr).length; ++i) {
-            const moreInfoBtnID = "#moreInfoBtn_" + Object.keys(detailPopupInfoArr)[i];
-            const closeBtnID = "#closeBtn_" + Object.keys(detailPopupInfoArr)[i];
-            const popupID = "#popup_" + Object.keys(detailPopupInfoArr)[i];
+        $(document).on("click", "#moreInfoBtn_NSHkw", function () {
+            $("#popup").html(html_NSHkw).show();
+        });
 
-            console.log(moreInfoBtnID, closeBtnID, popupID)
+        $(document).on("click", "#moreInfoBtn_soobin951", function () {
+            $("#popup").html(html_soobin).show();
+        });
 
-            $(moreInfoBtnID).click(async function () {
-                $("#popup").fadeIn();
+        $(document).on("click", "#moreInfoBtn_kyheon", function () {
+            $("#popup").html(html_seunjun).show();
+        });
 
-            })
-            $(closeBtnID).click(async function () {
-                $("#popup").fadeOut(1000);
-            })
-        }
+        $(document).on("click", "#closeBtn", function () {
+            $("#popup").hide();
 
-
-
+        });
     </script>
-
 </head>
 
 <body>
     <div class="d-flex" style="height:100vh">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;height:100%">
-            <a href="#home"
-                class="d-flex justify-content-center align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <div class="badge text-bg-primary align-items-center text-wrap" style="width: 8rem; font-size: large;">
-                    E1I3F4
-                </div>
-            </a>
+            <div class="d-flex justify-content-center" style="width: 100%; font-size: 50px; font-family:Dancing Script, cursive;">
+                E1I3F4
+            </div>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
@@ -386,7 +444,7 @@
             </ul>
             <hr>
             <div class="dropdown">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <img src="https://pds.saramin.co.kr/company/logo/202203/10/r8irhx_27rz-iuruh_logo.png" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong>Sparta NodeJS 6기</strong>
                 </a>
             </div>
@@ -439,82 +497,6 @@
         </div>
         <div id="popupGroup">
             <div id="popup" class="popuppage">
-                <div class="row d-flex">
-                    <div class="col-4 d-flex flex-column p-5">
-                        <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
-                            alt="..." class="img-thumbnail rounded-3" style="width: 400px;height: 400px;">
-                        <div class="row py-3">
-                            <dd class="col-6 pt-3" style="font-size:30px;text-align: center;">Name</dd>
-                            <dt class="col-6 pt-3" style="font-size:30px;text-align: center;">권영현</dt>
-                            <hr style="color:yellow;width: 3;">
-                            <dd class="col-sm-6 pt-3" style="font-size:30px;text-align: center;">MBTI</dd>
-                            <dt class="col-sm-6 pt-3" style="font-size:30px;text-align: center;">ISFP</dt>
-                            <hr style="color:royalblue">
-                            <p style="font-size:20px; font-weight: bold;text-align: center;">
-                                안녕하세요. 권영현이라고 합니다. <br> 잘 부탁드립니다.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-1 v_line px-0" style="width:30px"></div>
-                    <div class="col-6 py-5">
-                        <div class="accordion" id="accordionPanelsStayOpenExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseOne">
-                                        나만의 강점 : 뛰어난 몰입력
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                                    <div class="accordion-body">
-                                        어떠한 문제가 발생하였을 때, 오로지 그 문제에만 집중과 몰입을 하게 됩니다. 그리고 해결하기 전까지 계속 머릿속에 맴돌고 있어 어떻게든
-                                        자그만한
-                                        실마리가
-                                        보일때까지
-                                        잡고 있습니다. 이러한 점이 앞으로 개발하는데 큰 강점으로 다가올 것이라고 확신합니다.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseTwo">
-                                        협업 스타일 : 배려, 존중, 화목
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        저는 대부분의 사람들과 원만하게 지낼려고 노력합니다. 그래서 상대방들의 의견을 경청하고, 서로 의견이 다를 시 최대한 효율적인
-                                        합의점을 찾고자 노력합니다. 앞으로도 프로젝트를 진행하면서 팀원들과 갈등 없이 화목하게 지내고 싶습니다!
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseThree">
-                                        취미 : 게임
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        요즘 제가 제일 재밌게 하고 있는 게임은 PUBG의 'BATTLE GROUND'입니다. 한판한판 최후의 생존자로 남아 치킨을 뜯기 위해
-                                        플레이하는
-                                        과정이
-                                        늘 새롭고 짜릿합니다.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-1 d-flex justify-content-end align-items-end">
-                        <button id="closeBtn" class="btn btn-primary btn-sm p-3 m-3 rounded-pill"
-                            type="button">close</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
