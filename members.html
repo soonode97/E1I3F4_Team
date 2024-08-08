@@ -116,7 +116,7 @@
         }
 
         .popuppage {
-            display: inline;
+            display: none;
             width: 1200px;
             height: 800px;
             background-image: url('https://photo.coolenjoy.co.kr/bbs/data/26/1237998351/1.jpg');
@@ -150,6 +150,8 @@
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getStorage, ref, uploadString, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
+
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -169,18 +171,24 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const storage = getStorage(app);
 
-        let docs = await getDocs(collection(db, "memberInfo"));
+        let docs = await getDocs(collection(db, "MemberInfo"));
 
-        docs.forEach((doc) => {
+        docs.forEach(async (doc) => {
             let row = doc.data();
 
-            let image = row['image'];
-            let name = row['name'];
-            let mbti = row['mbti'];
-            let introText = row['introText'];
-            let gitUrl = row['gitUrl'];
-            let blogUrl = row['blogUrl']
+            const name = row['name'];
+            const mbti = row['mbti'];
+            const introText = row['introText'];
+            const gitUrl = row['gitUrl'];
+            const blogUrl = row['blogUrl']
+
+            const imageFileURL = "members/" + row['userID'] + ".png";
+            const imageUrl = await getDownloadURL(ref(storage, imageFileURL));
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            const image = URL.createObjectURL(blob);
 
             let temp_html = `
             <div class="container my-5">
@@ -203,16 +211,6 @@
                                 <dd class="col-sm-8 introTextFont">${introText}
                                 </dd>
                             </dl>
-                        </div>
-                        <div class="col d-flex justify-content-end align-items-end gap-2 p-3">
-                            <button id="moreInfoBtn"
-                                class="d-flex justify-content-end align-items-end btn btn-primary btn-lg p-3 rounded-pill"
-                                type="button">
-                                more info
-                                <svg class="bi ms-2" width="24" height="24">
-                                    <use xlink:href="#arrow-right-short"></use>
-                                </svg>
-                            </button>
                         </div>
                         <div class="col-2 d-flex justify-content-between flex-column align-items-center gap-2 p-3">
                             <a href="${gitUrl}" height="5" width="10" target="_blank">
@@ -256,7 +254,8 @@
 
     <div class="d-flex" style="height:100vh">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;height:100%">
-            <a href="#home" class="d-flex justify-content-center align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <a href="#home"
+                class="d-flex justify-content-center align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <div class="badge text-bg-primary align-items-center text-wrap" style="width: 8rem; font-size: large;">
                     E1I3F4
                 </div>
@@ -359,48 +358,52 @@
             <div class="col-6 py-5">
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" 
-                        aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                          나만의 강점 : 뛰어난 몰입력 
-                        </button>
-                      </h2>
-                      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                          어떠한 문제가 발생하였을 때, 오로지 그 문제에만 집중과 몰입을 하게 됩니다. 그리고 해결하기 전까지 계속 머릿속에 맴돌고 있어 어떻게든 자그만한 실마리가 보일때까지 
-                          잡고 있습니다. 이러한 점이 앞으로 개발하는데 큰 강점으로 다가올 것이라고 확신합니다.
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                aria-controls="panelsStayOpen-collapseOne">
+                                나만의 강점 : 뛰어난 몰입력
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                어떠한 문제가 발생하였을 때, 오로지 그 문제에만 집중과 몰입을 하게 됩니다. 그리고 해결하기 전까지 계속 머릿속에 맴돌고 있어 어떻게든 자그만한 실마리가
+                                보일때까지
+                                잡고 있습니다. 이러한 점이 앞으로 개발하는데 큰 강점으로 다가올 것이라고 확신합니다.
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" 
-                        aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                            협업 스타일 : 배려, 존중, 화목
-                        </button>
-                      </h2>
-                      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            저는 대부분의 사람들과 원만하게 지낼려고 노력합니다. 그래서 상대방들의 의견을 경청하고, 서로 의견이 다를 시 최대한 효율적인
-                            합의점을 찾고자 노력합니다. 앞으로도 프로젝트를 진행하면서 팀원들과 갈등 없이 화목하게 지내고 싶습니다!
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapseTwo">
+                                협업 스타일 : 배려, 존중, 화목
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                저는 대부분의 사람들과 원만하게 지낼려고 노력합니다. 그래서 상대방들의 의견을 경청하고, 서로 의견이 다를 시 최대한 효율적인
+                                합의점을 찾고자 노력합니다. 앞으로도 프로젝트를 진행하면서 팀원들과 갈등 없이 화목하게 지내고 싶습니다!
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" 
-                        aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                            취미 : 게임
-                        </button>
-                      </h2>
-                      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          요즘 제가 제일 재밌게 하고 있는 게임은 PUBG의 'BATTLE GROUND'입니다. 한판한판 최후의 생존자로 남아 치킨을 뜯기 위해 플레이하는 과정이
-                          늘 새롭고 짜릿합니다.
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapseThree">
+                                취미 : 게임
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                요즘 제가 제일 재밌게 하고 있는 게임은 PUBG의 'BATTLE GROUND'입니다. 한판한판 최후의 생존자로 남아 치킨을 뜯기 위해 플레이하는 과정이
+                                늘 새롭고 짜릿합니다.
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
+                </div>
             </div>
             <div class="col-1 d-flex justify-content-end align-items-end">
                 <button id="closeBtn" class="btn btn-primary btn-sm p-3 m-3 rounded-pill" type="button">close</button>
