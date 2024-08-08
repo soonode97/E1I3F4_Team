@@ -25,7 +25,6 @@
             /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #FFFFFF, #e9f2ff);
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
         }
 
         .spartaIcon {
@@ -123,6 +122,7 @@
         .modal > button {
             font-size: 28px;
         }
+
     </style>
 
     <script type="module">
@@ -228,7 +228,7 @@
 </head>
 
 <body>
-    <div class="d-flex" style="height: 100vh">
+    <div class="d-flex" style="height: 100vh;">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100%;">
             <div class="d-flex justify-content-center"
                 style="width: 100%; font-size: 50px; font-family:Dancing Script, cursive;">
@@ -269,22 +269,23 @@
             <div class="book_title">
                 <h1 class="guest_title" style="font-size:50px;"><span>방명록</span>
             </div>
-            <div class="input-group" style="width: 110vh;">
-                <span class="input-group-text" style="font-size:28px;">UserID and Password</span>
-                <input type="text" id="book_id" aria-label="UserID" class="form-control" placeholder="UserID">
-                <input type="text" id="book_pass" aria-label="Password" class="form-control"
-                    placeholder="Password(방명록 삭제시 필요)">
+            <div class="d-flex flex-column" style="margin-top:20px;">
+                <div class="input-group" style="width: 110vh;">
+                    <span class="input-group-text" style="font-size:28px;">UserID and Password</span>
+                    <input type="text" id="book_id" aria-label="UserID" class="form-control" placeholder="UserID">
+                    <input type="text" id="book_pass" aria-label="Password" class="form-control"
+                        placeholder="Password(방명록 삭제시 필요)">
+                </div>
+                <p></p>
+                <div class="input-group input-group-lg" style="width: 110vh; height: auto;">
+                    <span class="input-group-text" id="inputGroup-sizing-lg" style="font-size:28px;">방명록 작성</span>
+                    <input type="text" id="book_message" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-lg">
+                </div>
+                <p></p>
+                <button type="button" class="btn btn-primary" id="regisbtn" data-bs-toggle="modal"
+                    data-bs-target="#regisModal" style="font-size:28px; margin-right: auto;" >방명록 등록</button>
             </div>
-            <p></p>
-            <div class="input-group input-group-lg" style="width: 110vh; height: auto;">
-                <span class="input-group-text" id="inputGroup-sizing-lg" style="font-size:28px;">방명록 작성</span>
-                <input type="text" id="book_message" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-lg">
-            </div>
-            <p></p>
-            <button type="button" class="btn btn-primary" id="regisbtn" data-bs-toggle="modal"
-                data-bs-target="#regisModal" style="font-size:28px;">방명록 등록</button>
-            <hr>
             <hr>
             <div id="guestBookContainer"></div>
         </div>
