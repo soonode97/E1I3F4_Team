@@ -263,6 +263,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="input-wrapper right-align">
+                    <msg id="validMsg"></msg>
+                    <button type="button" class="btn btn-primary" id="registBtn">멤버 등록</button>
+                </div>
+            </div>
+
+            <!--멤버 등록 Modal-->
+            <div class="modal fade" id="registedModal" aria-hidden="true" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            멤버가 등록되었습니다.
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 유저 정보 부족 Modal -->
+            <div class="modal fade" id="registReqEmptyModal" aria-hidden="true" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            유저 정보가 부족합니다. 이름, 아이디, 팀 암호를 채워주세요.
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- 팀 암호 불일치 Modal -->
@@ -287,7 +319,6 @@
         const previewImage = document.getElementById('preview-image');
         const placeholderText = document.querySelector('.placeholder-text');
         const deleteButton = document.getElementById('delete-button');
-        let selectedFile = null;
 
         // 이미지 미리보기 클릭 시 파일 입력 클릭
         imagePreview.addEventListener('click', () => {
@@ -404,6 +435,9 @@
 
                         // 등록 성공 팝업 알림 출력
                         $('#registedModal').modal('show');
+                        const modalElement = document.getElementById('registSuccessModal');
+                        const modal = Modal(modalElement, { backdrop: false, keyboard: true, focus: true });
+                        modal.show();
 
                         // 폼 초기화
                         nameInput.value = "";
@@ -417,6 +451,9 @@
                     }
                 } else {
                     $('#registReqWrongModal').modal('show');
+                    // const modalElement = document.getElementById('registReqWrongModal');
+                    // const modal = new bootstrap.Modal(modalElement, { backdrop: false, keyboard: true, focus: true });
+                    // modal.show();
                 }
             } else {
                 $('#registReqEmptyModal').modal('show');
