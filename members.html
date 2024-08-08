@@ -387,7 +387,86 @@
                 html_NSHkw = ` `;
             }
             else if (userID === 'kyheon') {
-                html_kyheon = ` `;
+                html_kyheon = `
+            <div id="popup" class="popuppage">
+                <div class="row d-flex">
+                    <div class="col-4 d-flex flex-column p-5">
+                        <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
+                            alt="..." class="img-thumbnail rounded-3" style="width: 400px;height: 400px;">
+                        <div class="row py-3">
+                            <dd class="col-6 pt-3" style="font-size:30px;text-align: center;">Name</dd>
+                            <dt class="col-6 pt-3" style="font-size:30px;text-align: center;">권영현</dt>
+                            <hr style="color:yellow;width: 3;">
+                            <dd class="col-sm-6 pt-3" style="font-size:30px;text-align: center;">MBTI</dd>
+                            <dt class="col-sm-6 pt-3" style="font-size:30px;text-align: center;">ISFP</dt>
+                            <hr style="color:royalblue">
+                            <p style="font-size:20px; font-weight: bold;text-align: center;">
+                                안녕하세요. 권영현이라고 합니다. <br> 잘 부탁드립니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-1 v_line px-0" style="width:30px"></div>
+                    <div class="col-6 py-5">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                        나만의 강점 : 뛰어난 몰입력
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                    <div class="accordion-body">
+                                        어떠한 문제가 발생하였을 때, 오로지 그 문제에만 집중과 몰입을 하게 됩니다. 그리고 해결하기 전까지 계속 머릿속에 맴돌고 있어 어떻게든
+                                        자그만한
+                                        실마리가
+                                        보일때까지
+                                        잡고 있습니다. 이러한 점이 앞으로 개발하는데 큰 강점으로 다가올 것이라고 확신합니다.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseTwo">
+                                        협업 스타일 : 배려, 존중, 화목
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        저는 대부분의 사람들과 원만하게 지낼려고 노력합니다. 그래서 상대방들의 의견을 경청하고, 서로 의견이 다를 시 최대한 효율적인
+                                        합의점을 찾고자 노력합니다. 앞으로도 프로젝트를 진행하면서 팀원들과 갈등 없이 화목하게 지내고 싶습니다!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseThree">
+                                        취미 : 게임
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        요즘 제가 제일 재밌게 하고 있는 게임은 PUBG의 'BATTLE GROUND'입니다. 한판한판 최후의 생존자로 남아 치킨을 뜯기 위해
+                                        플레이하는
+                                        과정이
+                                        늘 새롭고 짜릿합니다.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1 d-flex justify-content-end align-items-end">
+                        <button id="closeBtn_kyheon" class="btn btn-primary btn-sm p-3 m-3 rounded-pill"
+                            type="button">close</button>
+                    </div>
+                </div>
+            </div>
+            `;
             }
             else if (userID === 'seunjun') {
                 html_seunjun = ` `;
