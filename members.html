@@ -14,9 +14,8 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Jua&family=Noto+Sans+KR:wght@100..900&display=swap');
 
-        * {
-            
-        }
+        * {}
+
         body {
             background: #e9f2ff;
             /* fallback for old browsers */
@@ -25,6 +24,7 @@
             background: linear-gradient(to right, #FFFFFF, #e9f2ff);
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         }
+
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -166,7 +166,6 @@
         .sidebar {
             position: fixed;
         }
-
     </style>
 
     <script type="module">
@@ -479,10 +478,10 @@
         </div>`;
             }
             else if (userID === 'kyheon') {
-                html_kyheon = html_kyheon = `
+                html_kyheon = `
                 <div class="row d-flex">
                     <div class="col-4 d-flex flex-column p-5">
-                        <img src="${image}"
+                        <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
                             alt="..." class="img-thumbnail rounded-3" style="width: 400px;height: 400px;">
                         <div class="row py-3">
                             <dd class="col-6 pt-3" style="font-size:30px;text-align: center;">Name</dd>
@@ -555,7 +554,6 @@
                         <button id="closeBtn" class="btn btn-primary btn-sm p-3 m-3 rounded-pill"
                             type="button">close</button>
                     </div>
-                </div>
             `;
             }
             else if (userID === 'souya1300') {
