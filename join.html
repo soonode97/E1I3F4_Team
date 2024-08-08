@@ -321,15 +321,6 @@
         import { getStorage, ref, uploadString, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
         import { getFirestore, doc, setDoc, addDoc, collection } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
-        // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        // import {
-        //     getFirestore,
-        //     doc,
-        //     addDoc,
-        //     collection,
-        //     setDoc,
-        // } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-
         const firebaseConfig = {
             apiKey: "AIzaSyB9HJvVGqIT-q9O_98bLmPkJcnB6VYkVks",
             authDomain: "e1i3f4-5cb7b.firebaseapp.com",
@@ -402,8 +393,6 @@
                         // 데이터 추가 (문서가 없으면 생성, 있으면 업데이트)
                         await addDoc(docRef, doc);
 
-                        // const linkSource = `data:image/png;base64,${base64String}`;
-                        // const filename = userId + ".png";
                         if (selectedFile) {
                             const fileName = document.getElementById('imgFile-upload').files[0].name;
                             uploadBase64Image(selectedFile, userId + ".png");
@@ -412,9 +401,7 @@
                         }
 
                         // 등록 성공 팝업 알림 출력
-                        const modalElement = document.getElementById('registSuccessModal');
-                        const modal = Modal(modalElement, { backdrop: false, keyboard: true, focus: true });
-                        modal.show();
+                        $('#registedModal').modal('show');
 
                         // 폼 초기화
                         nameInput.value = "";
@@ -427,9 +414,7 @@
                         console.error("Error writing document: ", error);
                     }
                 } else {
-                    // const modalElement = document.getElementById('registReqWrongModal');
-                    // const modal = new bootstrap.Modal(modalElement, { backdrop: false, keyboard: true, focus: true });
-                    // modal.show();
+                    $('#registReqWrongModal').modal('show');
                 }
             } else {
                 $('#registReqEmptyModal').modal('show');
