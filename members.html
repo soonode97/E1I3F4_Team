@@ -175,6 +175,7 @@
 
         let docs = await getDocs(collection(db, "MemberInfo"));
 
+
         docs.forEach(async (doc) => {
             let row = doc.data();
 
@@ -345,10 +346,10 @@
                 <div class="row py-3">
                     <dd class="col-6 pt-3" style="font-size:30px;text-align: center;">Name</dd>
                     <dt class="col-6 pt-3" style="font-size:30px;text-align: center;">권영현</dt>
-                    <hr style="color:red">
+                    <hr style="color:yellow;width: 3;">
                     <dd class="col-sm-6 pt-3" style="font-size:30px;text-align: center;">MBTI</dd>
                     <dt class="col-sm-6 pt-3" style="font-size:30px;text-align: center;">ISFP</dt>
-                    <hr style="color:red">
+                    <hr style="color:royalblue">
                     <p style="font-size:20px; font-weight: bold;text-align: center;">
                         안녕하세요. 권영현이라고 합니다. <br> 잘 부탁드립니다.
                     </p>
