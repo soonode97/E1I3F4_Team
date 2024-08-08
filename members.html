@@ -14,8 +14,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Jua&family=Noto+Sans+KR:wght@100..900&display=swap');
 
-        * {}
-
         body {
             background: #e9f2ff;
             /* fallback for old browsers */
@@ -165,6 +163,9 @@
 
         .sidebar {
             position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 280px;
         }
     </style>
 
@@ -647,8 +648,8 @@
 </head>
 
 <body>
-    <div class="d-flex" style="height:100vh">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar" style="width: 280px;height:100%">
+    <div class="d-flex" style="height:100vh;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar">
             <div class="d-flex justify-content-center"
                 style="width: 100%; font-size: 50px; font-family:Dancing Script, cursive;">
                 E1I3F4
@@ -681,16 +682,13 @@
                 <img src="https://pds.saramin.co.kr/company/logo/202203/10/r8irhx_27rz-iuruh_logo.png" alt="" width="32"
                     height="32" class="rounded-circle me-2">
                 <strong>Sparta NodeJS 6기</strong>
-                </a>
             </div>
         </div>
-        <div id="memberCard" class="flex-grow-1 p-3">
+        <div id="memberCard" class="flex-grow-1 p-3" style="margin-left: 280px;">
         </div>
         <div id="popupGroup">
             <div id="popup" class="popuppage">
-
             </div>
         </div>
     </div>
-
 </body>
