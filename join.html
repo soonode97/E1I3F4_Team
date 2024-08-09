@@ -194,7 +194,7 @@
                 </li>
                 <li class="nav-item bd-highlight">
                     <a href="guest_books.html" class="nav-link link-dark">
-                        Guest's Book
+                        Guest Book
                     </a>
                 </li>
             </ul>
@@ -336,6 +336,7 @@
         const previewImage = document.getElementById('preview-image');
         const placeholderText = document.querySelector('.placeholder-text');
         const deleteButton = document.getElementById('delete-button');
+        let selectedFile;
 
         // 이미지 미리보기 클릭 시 파일 입력 클릭
         imagePreview.addEventListener('click', () => {

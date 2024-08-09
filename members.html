@@ -344,12 +344,9 @@
                                 alt="Blog" style="width: 100px;height: 100px;">
                             </a>
                             <button id="moreInfoBtn_${userID}"
-                                class="d-flex justify-content-end align-items-end btn btn-primary btn-lg p-3 rounded-pill"
+                                class="d-flex justify-content-end align-items-end btn btn-primary btn-lg p-3 rounded-pill text-center"
                                 type="button">
-                                more info
-                                <svg class="bi ms-2" width="24" height="24">
-                                    <use xlink:href="#arrow-right-short"></use>
-                                </svg>
+                                더보기
                             </button>
                         </div>
                     </div>
@@ -484,7 +481,7 @@
                 html_kyheon = `
                 <div class="row d-flex">
                     <div class="col-4 d-flex flex-column p-5">
-                        <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png"
+                        <img src="${image}"
                             alt="..." class="img-thumbnail rounded-3" style="width: 400px;height: 400px;">
                         <div class="row py-3">
                             <dd class="col-6 pt-3" style="font-size:30px;text-align: center;">Name</dd>
@@ -675,7 +672,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="guest_books.html" class="nav-link link-dark">
-                        Guest's Book
+                        Guest Book
                     </a>
                 </li>
             </ul>
