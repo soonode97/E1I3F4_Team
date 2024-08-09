@@ -14,6 +14,21 @@
 </head>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Jua&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+    * {
+        font-family: "Dongle", sans-serif;
+    }
+
+    body {
+            background: #e9f2ff;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFFFFF, #e9f2ff);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFFFFF, #e9f2ff);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        
     ul {
         text-align: center;
     }
@@ -22,6 +37,7 @@
         display: flex;
         flex-direction: column;
         height: 100vh;
+        font-size: 35px;
     }
 
     .nav-item {
@@ -29,6 +45,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .spartaIcon {
+        font-size: 35px;
     }
 
     .container {
@@ -40,6 +60,7 @@
         align-items: center;
         /* 요소들을 상단 정렬 */
         margin-bottom: 100px;
+        font-size: 28px;
     }
 
     header {
@@ -102,8 +123,10 @@
     .input-wrapper>button {
         padding: 10px;
         margin-left: 10px;
+        width:80px;
         border-radius: 5px;
         border: 1px solid #ccc;
+        font-size: 28px;
     }
 
     .image-preview {
@@ -149,14 +172,9 @@
 <body>
     <div class="d-flex" style="height: 100vh;">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-            <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="50" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-                <div class="badge text-bg-primary text-wrap" style="width: 8rem; font-size: large;">
-                    E1I3F4
-                </div>
-            </a>
+            <div class="d-flex justify-content-center" style="width: 100%; font-size: 50px; font-family:Dancing Script, cursive;">
+                E1I3F4
+            </div>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item bd-highlight">
@@ -181,15 +199,15 @@
                 </li>
             </ul>
             <hr>
-            <div class="dropdown">
-                <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
+            <div class="spartaIcon">
+                <img src="https://pds.saramin.co.kr/company/logo/202203/10/r8irhx_27rz-iuruh_logo.png" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong>Sparta NodeJS 6기</strong>
                 </a>
             </div>
         </div>
         <div class = "container">
             <header>
-                <p style="font-size: 40px;">멤버 등록</p>
+                <p style="font-size: 50px;">멤버 등록</p>
             </header>
             <div class="section">
                 <div class="upload-section">
@@ -230,7 +248,6 @@
                         <input type="password" id="userPW">
                     </div>
                     <div class="input-wrapper right-align">
-                        <msg id="validMsg"></msg>
                         <button type="button" class="btn btn-primary" id="registBtn">등록</button>
                     </div>
                 </div>
