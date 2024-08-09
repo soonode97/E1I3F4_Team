@@ -130,7 +130,9 @@
             display: none;
             width: 1200px;
             height: 800px;
-            background-image: url('https://photo.coolenjoy.co.kr/bbs/data/26/1237998351/1.jpg');
+            background: #dac4ff;
+            background: -webkit-linear-gradient(to bottom, #FFFFFF, #b0b8ff);
+            background: linear-gradient(to bottom, #FFFFFF, #b0b8ff);
             background-size: cover;
             position: absolute;
             top: 50px;
@@ -358,7 +360,7 @@
 
             // 각자 멤버 더보기 카드 양식
             if (userID === 'soobin951') {
-                html_soobin = `<div class="row d-flex" style="margin:50px;">
+                html_soobin = `<div class="row d-flex" style="margin:100px auto auto 50px;">
             <div class="row d-flex">
                 <h1 style="
             caret-color: rgb(55, 53, 47);
@@ -377,17 +379,17 @@
                         😆 Favortie <br>
                         <div class="d-flex flex-row" style="width:100%;">
                             <figure style="margin:5px;">
-                                <img src=""
+                                <img src="./soobinImages/drawing.jpg"
                                     alt="Image 1" style="max-width: 100%; height: auto; border: 1px solid #cfcfcf;">
-                                <figcaption style="font-size: 15px; color:#1f1f1f; text-align: center;">게임</figcaption>
+                                <figcaption style="font-size: 15px; color:#1f1f1f; text-align: center;">그림</figcaption>
                             </figure>
                             <figure style="margin:5px;">
-                                <img src=""
+                                <img src="./soobinImages/food.jpg"
                                     alt="Image 1" style="max-width: 100%; height: auto; border: 1px solid #cfcfcf;">
                                 <figcaption style="font-size: 15px; color:#1f1f1f; text-align: center;">요리</figcaption>
                             </figure>
                             <figure style="margin:5px;">
-                                <img src="" alt="Image 1"
+                                <img src="./soobinImages/animal.jpg" alt="Image 1"
                                     style="max-width: 100%; height: auto; border: 1px solid #cfcfcf;">
                                 <figcaption style="font-size: 15px; color:#1f1f1f; text-align: center;">동물</figcaption>
                             </figure>
